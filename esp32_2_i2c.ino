@@ -1,5 +1,7 @@
-#include <Wire.>
-#include "MPU6050.h"
+#include <MPU6050.h>
+
+#include <Wire.h>
+//#include <MPU6050.h>
 #include <Servo.h>
 
 #define SCL_2 32
@@ -28,14 +30,16 @@ int16_t gx4, gy4, gz4;
 
 void setup(){
 
-    wire.begin();
-    wire1.begin(SCL_2,SDA_2);
-
+    Wire.begin();
+    Wire1.begin(SCL_2,SDA_2);
+    servo.attach(8);
+    servo2.attach(10);
 
     mpu1.begin(0x68);
     mpu2.begin(0x69);
     mpu3.begin(0x68, &wire1);
     mpu4.begin(0x69, &wire1);
+    Serial.begin(9600);
 
     // verify connection
 Serial.println("Testing device connections...");
